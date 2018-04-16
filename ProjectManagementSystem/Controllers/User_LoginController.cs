@@ -19,6 +19,31 @@ namespace ProjectManagementSystem.Controllers
         {
             return View();
         }
+        [HttpPost] public ActionResult Authorize(ProjectManagementSystem.Models.User_Login user_Login)
+        {
+            using (ProjectManagementSystemEntities db = new ProjectManagementSystemEntities())
+            {
+                var userDetails = db.User_Login.Where(x => x.Username == user_Login.Username && x.Password == user_Login.Password).FirstOrDefault();
+                if (userDetails == null)
+                {
+                    user_Login.LoginErrorMessage = "Wrong username or password.";
+                    return View("Index", user_Login);
+                }
+                else
+                {
+                    Session["userID"] = userDetails.UserID;
+                    Session["userName"] = userDetails.Username;
+                    return RedirectToAction("Index", "Home");
+                }
+            }
+        }
+
+        public ActionResult LogOut()
+        {
+            int userId = (int)Session["userID"];
+            Session.Abandon();
+            return RedirectToAction("Index", "Login");
+        }
     }
        
 }
