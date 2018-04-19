@@ -18,6 +18,9 @@ namespace ProjectManagementSystem.Controllers
         public ActionResult Index()
         {
             var eMPLOYEEs = db.EMPLOYEEs.Include(e => e.EMPLOYEE_DELIVERABLE);
+            var getTypeList = db.EMPLOYEE_TYPES.ToList();
+            SelectList list = new SelectList(getTypeList, "TypeID", "Employee_Type");
+            ViewBag.employeetype = list;
             return View(eMPLOYEEs.ToList());
         }
 
@@ -39,6 +42,9 @@ namespace ProjectManagementSystem.Controllers
         // GET: EMPLOYEEs/Create
         public ActionResult Create()
         {
+            var getTypeList = db.EMPLOYEE_TYPES.ToList();
+            SelectList list = new SelectList(getTypeList, "TypeID", "Employee_Type");
+            ViewBag.employeetype = list;
             ViewBag.Employee_ID = new SelectList(db.EMPLOYEE_DELIVERABLE, "Employee_deliverable_ID", "Last_update_by");
             return View();
         }
@@ -56,7 +62,9 @@ namespace ProjectManagementSystem.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-
+            var getTypeList = db.EMPLOYEE_TYPES.ToList();
+            SelectList list = new SelectList(getTypeList, "TypeID", "Employee_Type");
+            ViewBag.employeetype = list;
             ViewBag.Employee_ID = new SelectList(db.EMPLOYEE_DELIVERABLE, "Employee_deliverable_ID", "Last_update_by", eMPLOYEE.Employee_ID);
             return View(eMPLOYEE);
         }
@@ -73,6 +81,9 @@ namespace ProjectManagementSystem.Controllers
             {
                 return HttpNotFound();
             }
+            var getTypeList = db.EMPLOYEE_TYPES.ToList();
+            SelectList list = new SelectList(getTypeList, "TypeID", "Employee_Type");
+            ViewBag.employeetype = list;
             ViewBag.Employee_ID = new SelectList(db.EMPLOYEE_DELIVERABLE, "Employee_deliverable_ID", "Last_update_by", eMPLOYEE.Employee_ID);
             return View(eMPLOYEE);
         }
@@ -90,6 +101,9 @@ namespace ProjectManagementSystem.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+            var getTypeList = db.EMPLOYEE_TYPES.ToList();
+            SelectList list = new SelectList(getTypeList, "TypeID", "Employee_Type");
+            ViewBag.employeetype = list;
             ViewBag.Employee_ID = new SelectList(db.EMPLOYEE_DELIVERABLE, "Employee_deliverable_ID", "Last_update_by", eMPLOYEE.Employee_ID);
             return View(eMPLOYEE);
         }
@@ -127,6 +141,8 @@ namespace ProjectManagementSystem.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+
         }
+       
     }
 }

@@ -33,7 +33,7 @@
           </Key>
           <Property Name="Deliverable_ID" Type="int" Nullable="false" />
           <Property Name="Deliverable_deadline" Type="date" Nullable="false" />
-          <Property Name="Deliverable_end_date" Type="date" Nullable="false" />
+          <Property Name="Deliverable_end_date" Type="date" />
           <Property Name="Deliverable_start_date" Type="date" Nullable="false" />
           <Property Name="Name" Type="varchar" MaxLength="25" Nullable="false" />
           <Property Name="Budget" Type="money" Nullable="false" />
@@ -78,6 +78,13 @@
           <Property Name="Last_update" Type="datetime" Nullable="false" />
           <Property Name="Last_update_by" Type="varchar" MaxLength="25" Nullable="false" />
         </EntityType>
+        <EntityType Name="EMPLOYEE_TYPES">
+          <Key>
+            <PropertyRef Name="TypeID" />
+          </Key>
+          <Property Name="TypeID" Type="int" Nullable="false" />
+          <Property Name="Employee_Type" Type="varchar" MaxLength="10" />
+        </EntityType>
         <EntityType Name="PROJECT">
           <Key>
             <PropertyRef Name="Project_ID" />
@@ -88,7 +95,7 @@
           <Property Name="Deadline" Type="date" Nullable="false" />
           <Property Name="Budget" Type="money" Nullable="false" />
           <Property Name="Start_date" Type="date" Nullable="false" />
-          <Property Name="End_date" Type="date" Nullable="false" />
+          <Property Name="End_date" Type="date" />
           <Property Name="Progress_status" Type="varchar" MaxLength="100" />
           <Property Name="Last_update" Type="datetime" Nullable="false" />
           <Property Name="Last_update_by" Type="varchar" MaxLength="25" Nullable="false" />
@@ -117,12 +124,12 @@
           <Property Name="Employee_ID" Type="int" Nullable="false" />
           <Property Name="Deliverable_ID" Type="int" Nullable="false" />
         </EntityType>
-        <EntityType Name="User_Login">
+        <EntityType Name="User_login">
           <Key>
-            <PropertyRef Name="UserID" />
+            <PropertyRef Name="Employee_ID" />
           </Key>
-          <Property Name="UserID" Type="int" Nullable="false" />
-          <Property Name="Username" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Employee_ID" Type="int" Nullable="false" />
+          <Property Name="Username" Type="varchar" MaxLength="25" />
           <Property Name="Password" Type="varchar" MaxLength="15" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
@@ -251,6 +258,18 @@ warning 6002: The table/view 'ProjectManagementSystem.sys.database_firewall_rule
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_User_login_EMPLOYEE">
+          <End Role="EMPLOYEE" Type="Self.EMPLOYEE" Multiplicity="1" />
+          <End Role="User_login" Type="Self.User_login" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="EMPLOYEE">
+              <PropertyRef Name="Employee_ID" />
+            </Principal>
+            <Dependent Role="User_login">
+              <PropertyRef Name="Employee_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
         <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
@@ -289,10 +308,11 @@ warning 6002: The table/view 'ProjectManagementSystem.sys.database_firewall_rule
           <EntitySet Name="DEPARTMENT" EntityType="Self.DEPARTMENT" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="EMPLOYEE" EntityType="Self.EMPLOYEE" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="EMPLOYEE_DELIVERABLE" EntityType="Self.EMPLOYEE_DELIVERABLE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EMPLOYEE_TYPES" EntityType="Self.EMPLOYEE_TYPES" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PROJECT" EntityType="Self.PROJECT" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TIMESHEET" EntityType="Self.TIMESHEET" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="User_Login" EntityType="Self.User_Login" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User_login" EntityType="Self.User_login" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="database_firewall_rules" EntityType="Self.database_firewall_rules" store:Type="Views" store:Schema="sys">
             <DefiningQuery>SELECT 
     [database_firewall_rules].[id] AS [id], 
@@ -339,6 +359,10 @@ warning 6002: The table/view 'ProjectManagementSystem.sys.database_firewall_rule
             <End Role="EMPLOYEE" EntitySet="EMPLOYEE" />
             <End Role="TIMESHEET" EntitySet="TIMESHEET" />
           </AssociationSet>
+          <AssociationSet Name="FK_User_login_EMPLOYEE" Association="Self.FK_User_login_EMPLOYEE">
+            <End Role="EMPLOYEE" EntitySet="EMPLOYEE" />
+            <End Role="User_login" EntitySet="User_login" />
+          </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -375,7 +399,7 @@ warning 6002: The table/view 'ProjectManagementSystem.sys.database_firewall_rule
           </Key>
           <Property Name="Deliverable_ID" Type="Int32" Nullable="false" />
           <Property Name="Deliverable_deadline" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="Deliverable_end_date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Deliverable_end_date" Type="DateTime" Precision="0" />
           <Property Name="Deliverable_start_date" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="Name" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Budget" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
@@ -415,6 +439,7 @@ warning 6002: The table/view 'ProjectManagementSystem.sys.database_firewall_rule
           <NavigationProperty Name="EMPLOYEE_DELIVERABLE" Relationship="Self.FK_EMPLOYEE_DELIVERABLE_EMPLOYEE" FromRole="EMPLOYEE" ToRole="EMPLOYEE_DELIVERABLE" />
           <NavigationProperty Name="PROJECTs" Relationship="Self.FK_PROJECT_EMPLOYEE" FromRole="EMPLOYEE" ToRole="PROJECT" />
           <NavigationProperty Name="TIMESHEETs" Relationship="Self.FK_TIMESHEET_EMPLOYEE" FromRole="EMPLOYEE" ToRole="TIMESHEET" />
+          <NavigationProperty Name="User_login" Relationship="ProjectManagementSystemModel.FK_User_login_EMPLOYEE" FromRole="EMPLOYEE" ToRole="User_login" />
         </EntityType>
         <EntityType Name="EMPLOYEE_DELIVERABLE">
           <Key>
@@ -439,7 +464,7 @@ warning 6002: The table/view 'ProjectManagementSystem.sys.database_firewall_rule
           <Property Name="Deadline" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="Budget" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
           <Property Name="Start_date" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="End_date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="End_date" Type="DateTime" Precision="0" />
           <Property Name="Progress_status" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="Last_update" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Last_update_by" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
@@ -675,7 +700,12 @@ warning 6002: The table/view 'ProjectManagementSystem.sys.database_firewall_rule
             <Parameter Name="new_diagramname" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="sp_upgraddiagrams" />
-          <EntitySet Name="User_Login" EntityType="ProjectManagementSystemModel.User_Login" />
+          <EntitySet Name="User_login" EntityType="ProjectManagementSystemModel.User_login" />
+          <AssociationSet Name="FK_User_login_EMPLOYEE" Association="ProjectManagementSystemModel.FK_User_login_EMPLOYEE">
+            <End Role="EMPLOYEE" EntitySet="EMPLOYEEs" />
+            <End Role="User_login" EntitySet="User_login" />
+          </AssociationSet>
+          <EntitySet Name="EMPLOYEE_TYPES" EntityType="ProjectManagementSystemModel.EMPLOYEE_TYPES" />
         </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
           <Property Type="Int32" Name="version" Nullable="true" />
@@ -688,13 +718,33 @@ warning 6002: The table/view 'ProjectManagementSystem.sys.database_firewall_rule
           <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
           <Property Type="Int32" Name="OwnerID" Nullable="false" />
         </ComplexType>
-        <EntityType Name="User_Login">
+        <EntityType Name="User_login">
           <Key>
-            <PropertyRef Name="UserID" />
+            <PropertyRef Name="Employee_ID" />
           </Key>
-          <Property Name="UserID" Type="Int32" Nullable="false" />
-          <Property Name="Username" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Employee_ID" Type="Int32" Nullable="false" />
+          <Property Name="Username" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
           <Property Name="Password" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="EMPLOYEE" Relationship="ProjectManagementSystemModel.FK_User_login_EMPLOYEE" FromRole="User_login" ToRole="EMPLOYEE" />
+        </EntityType>
+        <Association Name="FK_User_login_EMPLOYEE">
+          <End Type="ProjectManagementSystemModel.EMPLOYEE" Role="EMPLOYEE" Multiplicity="1" />
+          <End Type="ProjectManagementSystemModel.User_login" Role="User_login" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="EMPLOYEE">
+              <PropertyRef Name="Employee_ID" />
+            </Principal>
+            <Dependent Role="User_login">
+              <PropertyRef Name="Employee_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="EMPLOYEE_TYPES">
+          <Key>
+            <PropertyRef Name="TypeID" />
+          </Key>
+          <Property Name="Employee_Type" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="TypeID" Type="Int32" Nullable="false" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -859,12 +909,20 @@ warning 6002: The table/view 'ProjectManagementSystem.sys.database_firewall_rule
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="ProjectManagementSystemModel.Store.sp_renamediagram" />
           <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="ProjectManagementSystemModel.Store.sp_upgraddiagrams" />
-          <EntitySetMapping Name="User_Login">
-            <EntityTypeMapping TypeName="ProjectManagementSystemModel.User_Login">
-              <MappingFragment StoreEntitySet="User_Login">
+          <EntitySetMapping Name="User_login">
+            <EntityTypeMapping TypeName="ProjectManagementSystemModel.User_login">
+              <MappingFragment StoreEntitySet="User_login">
                 <ScalarProperty Name="Password" ColumnName="Password" />
                 <ScalarProperty Name="Username" ColumnName="Username" />
-                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="Employee_ID" ColumnName="Employee_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EMPLOYEE_TYPES">
+            <EntityTypeMapping TypeName="ProjectManagementSystemModel.EMPLOYEE_TYPES">
+              <MappingFragment StoreEntitySet="EMPLOYEE_TYPES">
+                <ScalarProperty Name="TypeID" ColumnName="TypeID" />
+                <ScalarProperty Name="Employee_Type" ColumnName="Employee_Type" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

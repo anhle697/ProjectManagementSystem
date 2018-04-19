@@ -23,7 +23,7 @@ namespace ProjectManagementSystem.Models
     
         public int Deliverable_ID { get; set; }
         public System.DateTime Deliverable_deadline { get; set; }
-        public System.DateTime Deliverable_end_date { get; set; }
+        public Nullable<System.DateTime> Deliverable_end_date { get; set; }
         public System.DateTime Deliverable_start_date { get; set; }
         public string Name { get; set; }
         public decimal Budget { get; set; }

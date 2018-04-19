@@ -37,7 +37,8 @@ namespace ProjectManagementSystem.Models
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<TIMESHEET> TIMESHEETs { get; set; }
         public virtual DbSet<database_firewall_rules> database_firewall_rules { get; set; }
-        public virtual DbSet<User_Login> User_Login { get; set; }
+        public virtual DbSet<User_login> User_login { get; set; }
+        public virtual DbSet<EMPLOYEE_TYPES> EMPLOYEE_TYPES { get; set; }
     
         public virtual int sp_alterdiagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
         {

@@ -1,29 +1,26 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
 using System.Linq;
-using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using ProjectManagementSystem.Models;
 
 namespace ProjectManagementSystem.Controllers
 {
-    public class User_LoginController : Controller
+    public class User_loginController : Controller
     {
-        private ProjectManagementSystemEntities db = new ProjectManagementSystemEntities();
-
-        // Go to Login Page
+        // GET: User_login
         public ActionResult Index()
         {
             return View();
         }
-        [HttpPost] public ActionResult Authorize(ProjectManagementSystem.Models.User_Login user_Login)
+
+        [HttpPost]
+        public ActionResult Authorize(ProjectManagementSystem.Models.User_login user_Login)
         {
             using (ProjectManagementSystemEntities db = new ProjectManagementSystemEntities())
             {
-                var userDetails = db.User_Login.Where(x => x.Username == user_Login.Username && x.Password == user_Login.Password).FirstOrDefault();
+                var userDetails = db.User_login.Where(x => x.Username == user_Login.Username && x.Password == user_Login.Password).FirstOrDefault();
                 if (userDetails == null)
                 {
                     user_Login.LoginErrorMessage = "Wrong username or password.";
@@ -31,7 +28,7 @@ namespace ProjectManagementSystem.Controllers
                 }
                 else
                 {
-                    Session["userID"] = userDetails.UserID;
+                    Session["userID"] = userDetails.Employee_ID;
                     Session["userName"] = userDetails.Username;
                     return RedirectToAction("Index", "Home");
                 }
@@ -42,8 +39,7 @@ namespace ProjectManagementSystem.Controllers
         {
             int userId = (int)Session["userID"];
             Session.Abandon();
-            return RedirectToAction("Index", "Login");
+            return RedirectToAction("Index", "User_login");
         }
     }
-       
 }

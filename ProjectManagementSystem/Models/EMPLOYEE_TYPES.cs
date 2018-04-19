@@ -12,12 +12,9 @@ namespace ProjectManagementSystem.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class User_login
+    public partial class EMPLOYEE_TYPES
     {
-        public int Employee_ID { get; set; }
-        public string Username { get; set; }
-        public string Password { get; set; }
-        public string LoginErrorMessage { get; set; }
-        public virtual EMPLOYEE EMPLOYEE { get; set; }
+        public int TypeID { get; set; }
+        public string Employee_Type { get; set; }
     }
 }

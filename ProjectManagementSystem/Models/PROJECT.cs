@@ -27,7 +27,7 @@ namespace ProjectManagementSystem.Models
         public System.DateTime Deadline { get; set; }
         public decimal Budget { get; set; }
         public System.DateTime Start_date { get; set; }
-        public System.DateTime End_date { get; set; }
+        public Nullable<System.DateTime> End_date { get; set; }
         public string Progress_status { get; set; }
         public System.DateTime Last_update { get; set; }
         public string Last_update_by { get; set; }

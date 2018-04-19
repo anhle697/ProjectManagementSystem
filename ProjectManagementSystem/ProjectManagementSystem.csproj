@@ -154,7 +154,7 @@
     <Compile Include="Controllers\DELIVERABLEsController.cs" />
     <Compile Include="Controllers\EMPLOYEEsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\User_LoginController.cs" />
+    <Compile Include="Controllers\User_loginController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -177,6 +177,9 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\EMPLOYEE_DELIVERABLE.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EMPLOYEE_TYPES.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Model1.Context.cs">
@@ -209,14 +212,14 @@
     <Compile Include="Models\TIMESHEET.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\User_Login.cs">
+    <Compile Include="Models\User_login.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Views\CLIENT_PROJECTController.cs" />
-    <Compile Include="Views\DEPARTMENTsController.cs" />
-    <Compile Include="Views\PROJECTsController.cs" />
-    <Compile Include="Views\TIMESHEETsController.cs" />
+    <Compile Include="Controllers\CLIENT_PROJECTController.cs" />
+    <Compile Include="Controllers\DEPARTMENTsController.cs" />
+    <Compile Include="Controllers\PROJECTsController.cs" />
+    <Compile Include="Controllers\TIMESHEETsController.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-litera.css" />
@@ -273,8 +276,6 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\CLIENTs\Create.cshtml" />
     <Content Include="Views\CLIENTs\Delete.cshtml" />
@@ -291,7 +292,7 @@
     <Content Include="Views\DELIVERABLEs\Details.cshtml" />
     <Content Include="Views\DELIVERABLEs\Edit.cshtml" />
     <Content Include="Views\DELIVERABLEs\Index.cshtml" />
-    <Content Include="Views\User_Login\Index.cshtml" />
+    <Content Include="Views\User_login\Index.cshtml" />
     <Content Include="Views\PROJECTs\Create.cshtml" />
     <Content Include="Views\PROJECTs\Delete.cshtml" />
     <Content Include="Views\PROJECTs\Details.cshtml" />
@@ -315,6 +316,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\EmployeTypesList\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

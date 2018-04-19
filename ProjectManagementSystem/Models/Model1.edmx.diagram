@@ -24,7 +24,9 @@
         <AssociationConnector Association="ProjectManagementSystemModel.FK_EMPLOYEE_DELIVERABLE_EMPLOYEE" ManuallyRouted="false" />
         <AssociationConnector Association="ProjectManagementSystemModel.FK_PROJECT_EMPLOYEE" ManuallyRouted="false" />
         <AssociationConnector Association="ProjectManagementSystemModel.FK_TIMESHEET_EMPLOYEE" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="ProjectManagementSystemModel.User_Login" Width="1.5" PointX="0.75" PointY="9.75" />
+        <EntityTypeShape EntityType="ProjectManagementSystemModel.User_login" Width="1.5" PointX="3" PointY="9" />
+        <AssociationConnector Association="ProjectManagementSystemModel.FK_User_login_EMPLOYEE" />
+        <EntityTypeShape EntityType="ProjectManagementSystemModel.EMPLOYEE_TYPES" Width="1.5" PointX="5.375" PointY="9.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

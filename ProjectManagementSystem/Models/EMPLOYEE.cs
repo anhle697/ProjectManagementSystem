@@ -36,5 +36,6 @@ namespace ProjectManagementSystem.Models
         public virtual ICollection<PROJECT> PROJECTs { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TIMESHEET> TIMESHEETs { get; set; }
+        public virtual User_login User_login { get; set; }
     }
 }
