@@ -66,7 +66,6 @@
           <Property Name="Last_update" Type="datetime" Nullable="false" />
           <Property Name="Last_update_by" Type="varchar" MaxLength="25" Nullable="false" />
           <Property Name="Email_address" Type="varchar" MaxLength="25" Nullable="false" />
-          <Property Name="Password" Type="varchar" MaxLength="25" />
         </EntityType>
         <EntityType Name="EMPLOYEE_DELIVERABLE">
           <Key>

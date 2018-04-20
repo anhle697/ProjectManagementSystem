@@ -14,7 +14,7 @@ namespace ProjectManagementSystem.Models
     
     public partial class EMPLOYEE_TYPES
     {
-        public string Employee_Type { get; set; }
         public int TypeID { get; set; }
+        public string Employee_Type { get; set; }
     }
 }

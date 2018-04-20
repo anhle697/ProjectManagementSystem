@@ -22,8 +22,8 @@ namespace ProjectManagementSystem.Models
     
         public int Client_ID { get; set; }
         public string Name { get; set; }
-        public string EmailAddress { get; set; }
         public string PhoneNumber { get; set; }
+        public string EmailAddress { get; set; }
         public System.DateTime Last_Update { get; set; }
         public string Last_Update_By { get; set; }
     
