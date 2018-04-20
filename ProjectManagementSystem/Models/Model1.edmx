@@ -66,6 +66,7 @@
           <Property Name="Last_update" Type="datetime" Nullable="false" />
           <Property Name="Last_update_by" Type="varchar" MaxLength="25" Nullable="false" />
           <Property Name="Email_address" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="Password" Type="varchar" MaxLength="25" />
         </EntityType>
         <EntityType Name="EMPLOYEE_DELIVERABLE">
           <Key>
@@ -440,6 +441,7 @@ warning 6002: The table/view 'ProjectManagementSystem.sys.database_firewall_rule
           <NavigationProperty Name="PROJECTs" Relationship="Self.FK_PROJECT_EMPLOYEE" FromRole="EMPLOYEE" ToRole="PROJECT" />
           <NavigationProperty Name="TIMESHEETs" Relationship="Self.FK_TIMESHEET_EMPLOYEE" FromRole="EMPLOYEE" ToRole="TIMESHEET" />
           <NavigationProperty Name="User_login" Relationship="ProjectManagementSystemModel.FK_User_login_EMPLOYEE" FromRole="EMPLOYEE" ToRole="User_login" />
+          <Property Name="Password" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="EMPLOYEE_DELIVERABLE">
           <Key>
@@ -807,6 +809,7 @@ warning 6002: The table/view 'ProjectManagementSystem.sys.database_firewall_rule
           <EntitySetMapping Name="EMPLOYEEs">
             <EntityTypeMapping TypeName="ProjectManagementSystemModel.EMPLOYEE">
               <MappingFragment StoreEntitySet="EMPLOYEE">
+                <ScalarProperty Name="Password" ColumnName="Password" />
                 <ScalarProperty Name="Employee_ID" ColumnName="Employee_ID" />
                 <ScalarProperty Name="F_name" ColumnName="F_name" />
                 <ScalarProperty Name="Employee_type" ColumnName="Employee_type" />

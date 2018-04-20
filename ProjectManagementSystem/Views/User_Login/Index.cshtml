@@ -1,7 +1,7 @@
 ﻿@model ProjectManagementSystem.Models.User_login
-@{   Layout = null;
+@{ViewBag.Title = "Login";
+        
 }
-
 <!DOCTYPE html>
 
 <html>
@@ -9,13 +9,7 @@
     <meta name="viewport" content="width=device-width" />
     <title>Login</title>
     <style>
-        #login-div {
-            position: absolute;
-            left: 40%;
-            top: 40%;
-            border: 1px solid #ccc;
-            padding: 10px 10px;
-        }
+       
 
         .field-validation-error {
             color: red;
@@ -23,10 +17,6 @@
     </style>
 </head>
 <body>
-    <div class="jumbotron">
-        <h1>Project Management System</h1>
-        <p class="lead">Team 3: Patricio, Ahn, Haoxian, Etienne, Uroosa</p>
-    </div>
     <div id="login-div">
         @using (Html.BeginForm("Authorize", "User_login", FormMethod.Post))
     {
