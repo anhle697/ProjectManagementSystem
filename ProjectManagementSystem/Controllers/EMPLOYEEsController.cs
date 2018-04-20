@@ -15,6 +15,7 @@ namespace ProjectManagementSystem.Controllers
         private ProjectManagementSystemEntities db = new ProjectManagementSystemEntities();
 
         // GET: EMPLOYEEs
+        [HttpGet]
         public ActionResult Index()
         {
             var eMPLOYEEs = db.EMPLOYEEs.Include(e => e.EMPLOYEE_DELIVERABLE);
@@ -22,6 +23,17 @@ namespace ProjectManagementSystem.Controllers
             SelectList list = new SelectList(getTypeList, "TypeID", "Employee_Type");
             ViewBag.employeetype = list;
             return View(eMPLOYEEs.ToList());
+        }
+
+        [HttpPost]
+        public ActionResult Index(string FirstName, string EmpType, string LastName, string Email, EMPLOYEE emp)
+        {
+            var eMPLOYEEs = db.EMPLOYEEs.ToList().Where(p => p.F_name.StartsWith(FirstName) && p.Employee_type.StartsWith(EmpType)
+            && p.L_name.StartsWith(LastName) && p.Email_address.Contains(Email));
+            var getTypeList = db.EMPLOYEE_TYPES.ToList();
+            SelectList list = new SelectList(getTypeList, "TypeID", "Employee_Type");
+            ViewBag.employeetype = list;
+            return View(eMPLOYEEs);
         }
 
         // GET: EMPLOYEEs/Details/5

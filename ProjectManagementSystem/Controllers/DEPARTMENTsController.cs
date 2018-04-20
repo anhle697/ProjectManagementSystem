@@ -15,9 +15,17 @@ namespace ProjectManagementSystem.Views
         private ProjectManagementSystemEntities db = new ProjectManagementSystemEntities();
 
         // GET: DEPARTMENTs
+        [HttpGet]
         public ActionResult Index()
         {
             return View(db.DEPARTMENTs.ToList());
+        }
+
+        [HttpPost]
+        public ActionResult Index(string DepartmentName, DEPARTMENT dEPARTMENT)
+        {
+            var DEPARTMENTs = db.DEPARTMENTs.ToList().Where(p => p.Name.StartsWith(DepartmentName)); 
+            return View(DEPARTMENTs);
         }
 
         // GET: DEPARTMENTs/Details/5

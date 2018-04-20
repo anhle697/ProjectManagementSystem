@@ -15,9 +15,17 @@ namespace ProjectManagementSystem.Controllers
         private ProjectManagementSystemEntities db = new ProjectManagementSystemEntities();
 
         // GET: CLIENTs
+        [HttpGet]
         public ActionResult Index()
         {
             return View(db.CLIENTs.ToList());
+        }
+
+        [HttpPost]
+        public ActionResult Index(string ClientName, string Email, string Phone, CLIENT Client)
+        {
+            var cLIENTs = db.CLIENTs.ToList().Where(p => p.Name.StartsWith(ClientName) && p.EmailAddress.Contains(Email) && p.PhoneNumber.Contains(Phone));
+            return View(cLIENTs);
         }
 
         // GET: CLIENTs/Details/5
